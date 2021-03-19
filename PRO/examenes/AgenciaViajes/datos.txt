@@ -1,0 +1,1 @@
+ficheroPrueba.txtEsto es una prueba de contenido de fichero
