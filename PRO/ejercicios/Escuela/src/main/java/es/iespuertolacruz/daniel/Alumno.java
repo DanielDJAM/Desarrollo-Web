@@ -13,17 +13,17 @@ public class Alumno extends Persona {
 
     @Override
     protected String getNombre() {
-        return null;
+        return this.nombre;
     }
 
     @Override
     protected String getApellidos() {
-        return null;
+        return this.apellidos;
     }
 
     @Override
     protected String getDni() {
-        return null;
+        return this.dni;
     }
 
     public Nota getNota() {
@@ -41,5 +41,21 @@ public class Alumno extends Persona {
         Alumno alumno = (Alumno) o;
         return Objects.equals(nota, alumno.nota);
     }
+
+    public boolean recuperacionAlumno(Nota nota) {
+        boolean recuperar = false;
+        if (nota.getCalificacion() <5.0f) {
+            return recuperar = true;
+        }
+        return recuperar;
+    }
+
+    public String listarNotas(){
+        return "Alumno: " + getNombre() + " [nota=" + nota.toString() + "]\n";
+    }
+
+
+
+    
 
 }

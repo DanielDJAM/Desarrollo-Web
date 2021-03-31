@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: es.iespuertolacruz.daniel.EscuelaTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s - in es.iespuertolacruz.daniel.EscuelaTest

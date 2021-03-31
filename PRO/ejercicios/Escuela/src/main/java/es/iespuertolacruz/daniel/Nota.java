@@ -18,19 +18,9 @@ public class Nota {
         return this.nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public float getCalificacion() {
         return this.calificacion;
     }
-
-    public void setCalificacion(float calificacion) {
-        this.calificacion = calificacion;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -41,6 +31,12 @@ public class Nota {
         }
         Nota nota = (Nota) o;
         return Objects.equals(nombre, nota.nombre) && calificacion == nota.calificacion;
+    }
+
+
+    @Override
+    public String toString() {
+        return "calificacion=" + calificacion + ", nombre=" + nombre + ".";
     }
 
     

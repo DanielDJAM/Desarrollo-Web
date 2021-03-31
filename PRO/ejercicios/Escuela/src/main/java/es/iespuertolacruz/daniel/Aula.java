@@ -20,16 +20,8 @@ public class Aula {
         return this.piso;
     }
 
-    public void setPiso(int piso) {
-        this.piso = piso;
-    }
-
     public int getNumero() {
         return this.numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
     }
 
     public Alumno getAlumno() {

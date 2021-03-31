@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Nota.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Escuela</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel</a> &gt; <span class="el_source">Nota.java</span></div><h1>Nota.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel;
+
+import java.util.Objects;
+
+public class Nota {
+
+    String nombre;
+    float calificacion;
+
+
+<span class="fc" id="L11">    public Nota(String nombre, float calificacion) {</span>
+<span class="fc" id="L12">        this.nombre = nombre;</span>
+<span class="fc" id="L13">        this.calificacion = calificacion;</span>
+<span class="fc" id="L14">    }</span>
+
+
+    public String getNombre() {
+<span class="fc" id="L18">        return this.nombre;</span>
+    }
+
+    public float getCalificacion() {
+<span class="fc" id="L22">        return this.calificacion;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if (o == this)</span>
+<span class="fc" id="L28">            return true;</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (!(o instanceof Nota)) {</span>
+<span class="nc" id="L30">            return false;</span>
+        }
+<span class="fc" id="L32">        Nota nota = (Nota) o;</span>
+<span class="pc bpc" id="L33" title="3 of 4 branches missed.">        return Objects.equals(nombre, nota.nombre) &amp;&amp; calificacion == nota.calificacion;</span>
+    }
+
+
+    @Override
+    public String toString() {
+<span class="fc" id="L39">        return &quot;calificacion=&quot; + calificacion + &quot;, nombre=&quot; + nombre + &quot;.&quot;;</span>
+    }
+
+    
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

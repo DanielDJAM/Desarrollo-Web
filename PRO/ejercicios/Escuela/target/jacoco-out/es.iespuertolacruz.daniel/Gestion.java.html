@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Gestion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Escuela</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel</a> &gt; <span class="el_source">Gestion.java</span></div><h1>Gestion.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel;
+
+import java.util.ArrayList;
+
+import es.iespuertolacruz.daniel.Exception.AlumnoException;
+import es.iespuertolacruz.daniel.Exception.AulaException;
+import es.iespuertolacruz.daniel.Exception.NotaException;
+import es.iespuertolacruz.daniel.Exception.ProfesorException;
+
+public class Gestion {
+
+    ArrayList&lt;Alumno&gt; gestionAlumnos;
+    ArrayList&lt;Profesor&gt; gestionProfesores;
+    ArrayList&lt;Nota&gt; gestionNotas;
+    ArrayList&lt;Aula&gt; gestionAulas;
+
+<span class="fc" id="L17">    public Gestion() {</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if (gestionAlumnos == null){</span>
+<span class="fc" id="L19">            gestionAlumnos = new ArrayList&lt;&gt;();</span>
+        }
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (gestionProfesores == null) {</span>
+<span class="fc" id="L22">            gestionProfesores = new ArrayList&lt;&gt;();</span>
+        }
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (gestionNotas == null) {</span>
+<span class="fc" id="L25">            gestionNotas = new ArrayList&lt;&gt;();</span>
+        }
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (gestionAulas == null) {</span>
+<span class="fc" id="L28">            gestionAulas = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L30">    }</span>
+
+    /**
+     * Getters de todos los ArrayLists
+     */
+
+    public ArrayList&lt;Alumno&gt; getGestionAlumnos() {
+<span class="nc" id="L37">        return this.gestionAlumnos;</span>
+    }
+
+    public ArrayList&lt;Profesor&gt; getGestionProfesores() {
+<span class="nc" id="L41">        return this.gestionProfesores;</span>
+    }
+
+    public ArrayList&lt;Nota&gt; getGestionNotas() {
+<span class="nc" id="L45">        return this.gestionNotas;</span>
+    }
+
+    public ArrayList&lt;Aula&gt; getGestionAulas() {
+<span class="nc" id="L49">        return this.gestionAulas;</span>
+    }
+
+    /**
+     * ------------------ INSERTAR ------------------
+     */
+
+    /**
+     * Metodo para insertar en la lista gestionAlumnos
+     * 
+     * @param alumno objeto a insertar
+     * @throws AlumnoException envia el error a dicha clase
+     */
+
+    public void insertar(Alumno alumno) throws AlumnoException {
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (!existe(alumno)) {</span>
+<span class="fc" id="L65">            gestionAlumnos.add(alumno);</span>
+        } else {
+<span class="nc" id="L67">            throw new AlumnoException(&quot;El alumno ya existe en la lista gestionAlumnos&quot;);</span>
+        }
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * Metodo para insertar en la lista gestionProfesores
+     * 
+     * @param profesor objeto a insertar
+     * @throws ProfesorException envia el error a dicha clase
+     */
+
+    public void insertar(Profesor profesor) throws ProfesorException {
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (!existe(profesor)) {</span>
+<span class="fc" id="L80">            gestionProfesores.add(profesor);</span>
+        } else {
+<span class="nc" id="L82">            throw new ProfesorException(&quot;El profesor ya existe en la lista gestionProfesores&quot;);</span>
+        }
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Metodo para insertar en la lista gestionNotas
+     * 
+     * @param nota objeto a insertar
+     * @throws NotaException envia el error a dicha clase
+     */
+
+    public void insertar(Nota nota) throws NotaException {
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (!existe(nota)) {</span>
+<span class="fc" id="L95">            gestionNotas.add(nota);</span>
+        } else {
+<span class="nc" id="L97">            throw new NotaException(&quot;La nota ya existe en la lista gestionNotas&quot;);</span>
+        }
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Metodo para insertar en la lista gestionAulas
+     * 
+     * @param aula objeto a insertar
+     * @throws AulaException envia el error a dicha clase
+     */
+
+    public void insertar(Aula aula) throws AulaException {
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (!existe(aula)) {</span>
+<span class="fc" id="L110">            gestionAulas.add(aula);</span>
+        } else {
+<span class="nc" id="L112">            throw new AulaException(&quot;El aula ya existe en la lista gestionAulas&quot;);</span>
+        }
+<span class="fc" id="L114">    }</span>
+
+    /**
+     * ------------------ ELIMINAR ------------------
+     */
+
+    /**
+     * Metodo para eliminar de la lista gestionAlumnos.
+     * 
+     * @param alumno objeto a eliminar.
+     * @throws AlumnoException
+     */
+
+    public void eliminar(Alumno alumno) throws AlumnoException {
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (existe(alumno)) {</span>
+<span class="fc" id="L129">            gestionAlumnos.remove(alumno);</span>
+        } else {
+<span class="nc" id="L131">            throw new AlumnoException(&quot;El alumno no existe en la lista gestionAlumnos&quot;);</span>
+        }
+<span class="fc" id="L133">    }</span>
+
+    /**
+     * Metodo para eliminar de la lista gestionProfesores.
+     * 
+     * @param profesor objeto a eliminar.
+     * @throws ProfesorException
+     */
+
+    public void eliminar(Profesor profesor) throws ProfesorException {
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if (existe(profesor)) {</span>
+<span class="fc" id="L144">            gestionProfesores.remove(profesor);</span>
+        } else {
+<span class="nc" id="L146">            throw new ProfesorException(&quot;El profesor no existe en la lista gestionProfesores&quot;);</span>
+        }
+<span class="fc" id="L148">    }</span>
+
+    /**
+     * Metodo para eliminar de la lista gestionNotas.
+     * 
+     * @param nota objeto a eliminar.
+     * @throws NotaException
+     */
+
+    public void eliminar(Nota nota) throws NotaException {
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if (existe(nota)) {</span>
+<span class="fc" id="L159">            gestionNotas.remove(nota);</span>
+        }else {
+<span class="nc" id="L161">            throw new NotaException(&quot;La nota no existe en la lista gestionNotas&quot;);</span>
+        }
+<span class="fc" id="L163">    }</span>
+
+    /**
+     * Metodo para eliminar de la lista gestionAulas.
+     * 
+     * @param aula objeto a eliminar.
+     * @throws AulaException
+     */
+
+    public void eliminar(Aula aula) throws AulaException {
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        if (existe(aula)) {</span>
+<span class="fc" id="L174">            gestionAulas.remove(aula);</span>
+        }else {
+<span class="nc" id="L176">            throw new AulaException(&quot;El aula no existe en la lista gestionAulas&quot;);</span>
+        }
+<span class="fc" id="L178">    }</span>
+
+    /**
+     * ------------------ EXISTE ------------------
+     */
+
+    /**
+     * Funcion para comprobar si un alumno existe en la lista gestionAlumnos
+     * 
+     * @param alumno objeto a comprobar
+     * @return True/false.
+     */
+
+    public boolean existe(Alumno alumno) {
+<span class="fc" id="L192">        return gestionAlumnos.contains(alumno);</span>
+    }
+
+    /**
+     * Funcion para comprobar si un profespr existe en la lista gestionProfesores
+     * 
+     * @param profesor objeto a comprobar
+     * @return True/false.
+     */
+
+    public boolean existe(Profesor profesor) {
+<span class="fc" id="L203">        return gestionProfesores.contains(profesor);</span>
+    }
+
+    /**
+     * Funcion para comprobar si un nota existe en la lista gestionNotas
+     * 
+     * @param nota objeto a comprobar
+     * @return True/false.
+     */
+
+    public boolean existe(Nota nota) {
+<span class="fc" id="L214">        return gestionNotas.contains(nota);</span>
+    }
+
+    /**
+     * Funcion para comprobar si un aula existe en la lista gestionAulas
+     * 
+     * @param aula objeto a comprobar
+     * @return True/false.
+     */
+
+    public boolean existe(Aula aula) {
+<span class="fc" id="L225">        return gestionAulas.contains(aula);</span>
+    }
+
+    /**
+     * -----------------------------------BUSCAR------------------------
+     */
+
+    /**
+     * Funcion para buscar las notas de un alumno por dni
+     * 
+     * @param dni elemento de busqueda
+     * @return retorna la nota del alumno
+     */
+
+    public String buscarNota(String dni) {
+<span class="fc" id="L240">        String notaAlumno = null;</span>
+<span class="fc" id="L241">        boolean encontrado = false;</span>
+<span class="fc" id="L242">        int i = 0;</span>
+
+<span class="pc bpc" id="L244" title="1 of 4 branches missed.">        while (i &lt; gestionAlumnos.size() &amp;&amp; !encontrado) {</span>
+<span class="fc" id="L245">            Alumno alumno = gestionAlumnos.get(i);</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">            if (alumno.getDni().equals(dni)) {</span>
+<span class="fc" id="L247">                notaAlumno = alumno.getNota().toString();</span>
+<span class="fc" id="L248">                encontrado = true;</span>
+            }
+<span class="fc" id="L250">            i++;</span>
+<span class="fc" id="L251">        }</span>
+<span class="fc" id="L252">        return notaAlumno;</span>
+    }
+
+  
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

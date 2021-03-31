@@ -13,17 +13,17 @@ public class Profesor extends Persona{
 
     @Override
     protected String getNombre() {
-        return null;
+        return this.nombre;
     }
 
     @Override
     protected String getApellidos() {
-        return null;
+        return this.apellidos;
     }
 
     @Override
     protected String getDni() {
-        return null;
+        return this.dni;
     }
 
     public Aula getAula() {

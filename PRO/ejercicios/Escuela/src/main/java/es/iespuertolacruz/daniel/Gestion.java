@@ -15,10 +15,18 @@ public class Gestion {
     ArrayList<Aula> gestionAulas;
 
     public Gestion() {
-        gestionAlumnos = new ArrayList<>();
-        gestionProfesores = new ArrayList<>();
-        gestionNotas = new ArrayList<>();
-        gestionAulas = new ArrayList<>();
+        if (gestionAlumnos == null){
+            gestionAlumnos = new ArrayList<>();
+        }
+        if (gestionProfesores == null) {
+            gestionProfesores = new ArrayList<>();
+        }
+        if (gestionNotas == null) {
+            gestionNotas = new ArrayList<>();
+        }
+        if (gestionAulas == null) {
+            gestionAulas = new ArrayList<>();
+        }
     }
 
     /**
@@ -49,40 +57,60 @@ public class Gestion {
      * Metodo para insertar en la lista gestionAlumnos
      * 
      * @param alumno objeto a insertar
+     * @throws AlumnoException envia el error a dicha clase
      */
 
-    public void insertar(Alumno alumno) {
-        gestionAlumnos.add(alumno);
+    public void insertar(Alumno alumno) throws AlumnoException {
+        if (!existe(alumno)) {
+            gestionAlumnos.add(alumno);
+        } else {
+            throw new AlumnoException("El alumno ya existe en la lista gestionAlumnos");
+        }
     }
 
     /**
      * Metodo para insertar en la lista gestionProfesores
      * 
      * @param profesor objeto a insertar
+     * @throws ProfesorException envia el error a dicha clase
      */
 
-    public void insertar(Profesor profesor) {
-        gestionProfesores.add(profesor);
+    public void insertar(Profesor profesor) throws ProfesorException {
+        if (!existe(profesor)) {
+            gestionProfesores.add(profesor);
+        } else {
+            throw new ProfesorException("El profesor ya existe en la lista gestionProfesores");
+        }
     }
 
     /**
      * Metodo para insertar en la lista gestionNotas
      * 
      * @param nota objeto a insertar
+     * @throws NotaException envia el error a dicha clase
      */
 
-    public void insertar(Nota nota) {
-        gestionNotas.add(nota);
+    public void insertar(Nota nota) throws NotaException {
+        if (!existe(nota)) {
+            gestionNotas.add(nota);
+        } else {
+            throw new NotaException("La nota ya existe en la lista gestionNotas");
+        }
     }
 
     /**
      * Metodo para insertar en la lista gestionAulas
      * 
      * @param aula objeto a insertar
+     * @throws AulaException envia el error a dicha clase
      */
 
-    public void insertar(Aula aula) {
-        gestionAulas.add(aula);
+    public void insertar(Aula aula) throws AulaException {
+        if (!existe(aula)) {
+            gestionAulas.add(aula);
+        } else {
+            throw new AulaException("El aula ya existe en la lista gestionAulas");
+        }
     }
 
     /**
@@ -97,7 +125,7 @@ public class Gestion {
      */
 
     public void eliminar(Alumno alumno) throws AlumnoException {
-        if (existe(alumno) == true) {
+        if (existe(alumno)) {
             gestionAlumnos.remove(alumno);
         } else {
             throw new AlumnoException("El alumno no existe en la lista gestionAlumnos");
@@ -112,7 +140,7 @@ public class Gestion {
      */
 
     public void eliminar(Profesor profesor) throws ProfesorException {
-        if (existe(profesor) == true) {
+        if (existe(profesor)) {
             gestionProfesores.remove(profesor);
         } else {
             throw new ProfesorException("El profesor no existe en la lista gestionProfesores");
@@ -127,7 +155,7 @@ public class Gestion {
      */
 
     public void eliminar(Nota nota) throws NotaException {
-        if (existe(nota) == true){
+        if (existe(nota)) {
             gestionNotas.remove(nota);
         }else {
             throw new NotaException("La nota no existe en la lista gestionNotas");
@@ -142,7 +170,7 @@ public class Gestion {
      */
 
     public void eliminar(Aula aula) throws AulaException {
-        if (existe(aula) == true) {
+        if (existe(aula)) {
             gestionAulas.remove(aula);
         }else {
             throw new AulaException("El aula no existe en la lista gestionAulas");
@@ -203,11 +231,12 @@ public class Gestion {
 
     /**
      * Funcion para buscar las notas de un alumno por dni
+     * 
      * @param dni elemento de busqueda
      * @return retorna la nota del alumno
      */
 
-    public String buscarAlumno(String dni) {
+    public String buscarNota(String dni) {
         String notaAlumno = null;
         boolean encontrado = false;
         int i = 0;
@@ -223,6 +252,9 @@ public class Gestion {
         return notaAlumno;
     }
 
-    
+  
+
+
+
 
 }
