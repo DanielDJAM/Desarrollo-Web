@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cuenta.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Banco</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel</a> &gt; <span class="el_source">Cuenta.java</span></div><h1>Cuenta.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel;
+
+import es.iespuertolacruz.daniel.Exception.CuentaException;
+
+public class Cuenta {
+
+
+    private String nombre;
+    private String numero;
+    private double saldo;
+    private double tipoInteres;
+
+    /**
+     * Constructor por defecto.
+     */
+
+<span class="fc" id="L17">    public Cuenta(){</span>
+<span class="fc" id="L18">    }</span>
+
+    /**
+     * Constructor con todos las propiedades.
+     * @param nom nombre de la cuenta.
+     * @param num numero de la cuenta.
+     * @param sal saldo de la cuenta.
+     * @param tipo tipo de interes.
+     */
+
+<span class="fc" id="L28">    public Cuenta(String nom, String num, double sal, double tipo){</span>
+<span class="fc" id="L29">        nombre =nom;</span>
+<span class="fc" id="L30">        numero=num;</span>
+<span class="fc" id="L31">        saldo=sal;</span>
+<span class="fc" id="L32">        tipoInteres=tipo;</span>
+        
+<span class="fc" id="L34">    }</span>
+
+    /**
+     * Metodo para ingresar una cantidad en la cuenta.
+     * @param cantidad a ingresar.
+     * @throws CuentaException error al ingresar.
+     */
+
+    public void ingresar(double cantidad) throws CuentaException{
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (cantidad &lt;= 0){</span>
+<span class="fc" id="L44">            throw new CuentaException(&quot;No se puede ingresar una cantidad negativa&quot;);</span>
+        }
+<span class="fc" id="L46">        saldo = saldo + cantidad;</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Metodo para retirar de la cuenta.
+     * @param cantidad a retirar.
+     * @throws CuentaException error al retirar.
+     */
+
+    public void retirar(double cantidad) throws CuentaException{
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (cantidad &lt;= 0) {</span>
+<span class="fc" id="L57">            throw new CuentaException (&quot;No se puede retirar una cantidad negativa&quot;);</span>
+        }
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (getSaldo() &lt; cantidad) {</span>
+<span class="fc" id="L60">            throw new CuentaException (&quot;No se hay suficiente saldo&quot;);</span>
+        }
+<span class="fc" id="L62">        setSaldo(getSaldo() - cantidad);</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Getters y Setters.
+     */
+
+    public String getNombre() {
+<span class="fc" id="L70">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) {
+<span class="fc" id="L74">        this.nombre = nombre;</span>
+<span class="fc" id="L75">    }</span>
+
+    public String getNumero() {
+<span class="fc" id="L78">        return numero;</span>
+    }
+
+    public void setNumero(String numero) {
+<span class="fc" id="L82">        this.numero = numero;</span>
+<span class="fc" id="L83">    }</span>
+
+    public double getSaldo() {
+<span class="fc" id="L86">        return saldo;</span>
+    }
+
+    public void setSaldo(double saldo) {
+<span class="fc" id="L90">        this.saldo = saldo;</span>
+<span class="fc" id="L91">    }</span>
+
+    public double getTipoInteres() {
+<span class="fc" id="L94">        return tipoInteres;</span>
+    }
+
+    public void setTipoInteres(double tipoInteres) {
+<span class="fc" id="L98">        this.tipoInteres = tipoInteres;</span>
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Mostrar saldo.
+     * @return retorna el saldo de la cuenta
+     */
+
+    @Override
+    public String toString() {
+<span class="nc" id="L108">        return &quot;Cuenta [saldo=&quot; + saldo + &quot;]&quot;;</span>
+    }
+
+    
+
+    
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

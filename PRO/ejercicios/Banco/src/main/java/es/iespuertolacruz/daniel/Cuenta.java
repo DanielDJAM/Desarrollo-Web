@@ -59,7 +59,7 @@ public class Cuenta {
         if (getSaldo() < cantidad) {
             throw new CuentaException ("No se hay suficiente saldo");
         }
-        saldo = saldo - cantidad;
+        setSaldo(getSaldo() - cantidad);
     }
 
     /**
@@ -97,6 +97,18 @@ public class Cuenta {
     public void setTipoInteres(double tipoInteres) {
         this.tipoInteres = tipoInteres;
     }
+
+    /**
+     * Mostrar saldo.
+     * @return retorna el saldo de la cuenta
+     */
+
+    @Override
+    public String toString() {
+        return "Cuenta [saldo=" + saldo + "]";
+    }
+
+    
 
     
 
