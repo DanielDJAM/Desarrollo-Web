@@ -1,16 +1,14 @@
 package es.iespuertolacruz.daniel.vista;
 
+import es.iespuertolacruz.daniel.api.Fruta;
 import es.iespuertolacruz.daniel.controlador.FrutaController;
+import es.iespuertolacruz.daniel.exception.FrutaException;
 
-/**
- * Hello world!
- *
- */
 public class AppFruteria {
 
     FrutaController frutaController;
 
-    public AppFruteria(){
+    public AppFruteria() {
         frutaController = new FrutaController();
     }
 
@@ -18,7 +16,7 @@ public class AppFruteria {
         System.out.println( "Hello World!" );
     }
 
-    public void insertar(String identificador, String nombre, float coste, float precio){
-        frutaController.insertar(identificador, nombre, coste, precio);
-    }
+    public void insertar(Fruta fruta) throws FrutaException {
+        frutaController.insertar(fruta);
+     }
 }

@@ -8,8 +8,8 @@ import java.util.Scanner;
 import es.iespuertolacruz.daniel.exception.FicheroException;
 
 public class Fichero {
-
-    private static final String RETORNO_CARRO = "\n";
+   
+   private static final String RETORNO_CARRO = "\n";
 
    /**
     * Funcion encargada de leer un ficher
@@ -102,5 +102,4 @@ public class Fichero {
       File fichero = new File(path);
       return fichero.isDirectory();
    }
-
 }

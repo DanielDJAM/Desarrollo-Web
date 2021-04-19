@@ -27,14 +27,22 @@ public class Fruta {
     }
 
     /**
+     * Constructor vacio.
+     */
+
+    public Fruta(){
+
+    }
+
+    /**
      * Getters y Setters de la clase fruta.
      */
 
-    public String getIdentidicador() {
+    public String getIdentificador() {
         return identidicador;
     }
 
-    public void setIdentidicador(String identidicador) {
+    public void setIdentificador(String identidicador) {
         this.identidicador = identidicador;
     }
 
