@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: es.iespuertolacruz.daniel.DivisaControllerTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.04 s <<< FAILURE! - in es.iespuertolacruz.daniel.DivisaControllerTest
+validarTest  Time elapsed: 0.031 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Ha ocurrido un error al insertar la divisa
+	at es.iespuertolacruz.daniel.DivisaControllerTest.setUp(DivisaControllerTest.java:33)
+
+existeTest  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Ha ocurrido un error al insertar la divisa
+	at es.iespuertolacruz.daniel.DivisaControllerTest.setUp(DivisaControllerTest.java:33)
+

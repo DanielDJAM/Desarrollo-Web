@@ -6,25 +6,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import es.iespuertolacruz.daniel.api.Calculadora;
+import es.iespuertolacruz.daniel.api.Divisa;
 import es.iespuertolacruz.daniel.excepcion.FicheroException;
+
+
 
 public class Fichero {
 
 private static final String SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO = "Se ha producido un error en el volcado del fichero";
 private static final String RETORNO_CARRO = "\n";
-private static final String NOMBRE_FICHERO = "Fichero-Calculadoras.txt";
+private static final String NOMBRE_FICHERO = "Fichero-divisas.txt";
 
 
 /**
- * Metodo encargado de almacenar una Calculadora en el fichero
- * @param Calculadora a insertar
+ * Metodo encargado de almacenar una divisa en el fichero
+ * @param Divisa a insertar
  * @throws FicheroException controlado
  */
-public void insertar(Calculadora calculadora) throws FicheroException {
-   ArrayList<Calculadora> listado;
+public void insertar(Divisa divisa) throws FicheroException {
+   ArrayList<Divisa> listado;
    listado = obtenerListado();
-   listado.add(calculadora);
+   listado.add(divisa);
    try {
       crear(NOMBRE_FICHERO, listado.toString());
    } catch (FicheroException exception) {
@@ -33,14 +35,14 @@ public void insertar(Calculadora calculadora) throws FicheroException {
 }
 
 /**
- * Metodo encargado de eliminar una Calculadora del fichero
- * @param Calculadora a eliminar 
+ * Metodo encargado de eliminar una divisa del fichero
+ * @param Divisa a eliminar 
  * @throws FicheroException error controlado
  */
-public void eliminar (Calculadora calculadora) throws FicheroException {
-   ArrayList<Calculadora> listado;
+public void eliminar (Divisa divisa) throws FicheroException {
+   ArrayList<Divisa> listado;
    listado = obtenerListado();
-   listado.remove(calculadora);
+   listado.remove(divisa);
    try {
       crear(NOMBRE_FICHERO, listado.toString());
    } catch (FicheroException exception) {
@@ -50,20 +52,25 @@ public void eliminar (Calculadora calculadora) throws FicheroException {
 
 /**
  * Metodo encargado de modificar un elemento del fichero
- * @param Calculadora
+ * @param divisa
+ * @throws FicheroException
  */
-public void modificar (Calculadora Calculadora) {
-   // limpiar el fichero
-   // volcar a fichero
+public void modificar (Divisa divisa, Divisa divisa2) throws FicheroException {
+   ArrayList<Divisa> listado = obtenerListado(); 
+      int posicion = -1;
+      posicion = listado.indexOf(divisa);
+      listado.remove(posicion);
+      listado.add(posicion, divisa2);
+      crear(NOMBRE_FICHERO, listado.toString());
 }
 
 /**
- * Funcion encargada de obtener el listado de Calculadoras del fichero
- * @return listado de Calculadoras
+ * Funcion encargada de obtener el listado de divisas del fichero
+ * @return listado de divisas
  * @throws FicheroException
  */
-public ArrayList<Calculadora> obtenerListado() throws FicheroException {
-   ArrayList<Calculadora> lista = new ArrayList<>();
+public ArrayList<Divisa> obtenerListado() throws FicheroException {
+   ArrayList<Divisa> lista = new ArrayList<>();
    File fichero = null;
    Scanner scanner = null;
 
@@ -74,9 +81,10 @@ public ArrayList<Calculadora> obtenerListado() throws FicheroException {
       }
       scanner = new Scanner(fichero);
       while (scanner.hasNextLine()) {
-         String linea = scanner.nextLine(); // Guardamos la linea en un String
-         Calculadora calculadora = new Calculadora(linea);
-         lista.add(calculadora);
+         String codigo = scanner.nextLine(); // Guardamos la linea en un String
+         double valor = scanner.nextDouble();
+         Divisa divisa = new Divisa(codigo, valor);
+         lista.add(divisa);
       }
    } catch (FicheroException e) {  
          throw e;
