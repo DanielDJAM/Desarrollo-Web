@@ -37,7 +37,7 @@ public class VehiculoController {
      * @throws FicheroException
      * @throws VehiculoException
      */
-    public void insertar(Vehiculo vehiculo) throws FicheroException, VehiculoException{
+    public void insertar(Vehiculo vehiculo) throws VehiculoException, FicheroException{
         validar(vehiculo);
         if (existe(vehiculo.getMatricula())) {
             throw new VehiculoException("El vehiculo se encuentra almacenado");
@@ -75,11 +75,11 @@ public class VehiculoController {
 
     /**
     * Funcion que verifica si un vehiculo existe 
-    * @param identificador encontrar
+    * @param matricula a encontrar
     * @return true/false
      * @throws FicheroException
     */
-   public boolean existe(String matricula) throws VehiculoException, FicheroException {
+   public boolean existe(String matricula) throws FicheroException {
     boolean encontrado = false;
     Vehiculo vehiculo = null;
 

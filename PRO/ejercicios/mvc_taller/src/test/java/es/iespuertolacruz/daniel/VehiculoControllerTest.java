@@ -12,6 +12,7 @@ import es.iespuertolacruz.daniel.api.Vehiculo;
 import es.iespuertolacruz.daniel.controller.VehiculoController;
 import es.iespuertolacruz.daniel.excepcion.FicheroException;
 import es.iespuertolacruz.daniel.excepcion.VehiculoException;
+import es.iespuertolacruz.daniel.modelo.Fichero;
 import es.iespuertolacruz.daniel.modelo.VehiculoModelo;
 
 public class VehiculoControllerTest extends UtilidadesTest {
@@ -21,6 +22,7 @@ public class VehiculoControllerTest extends UtilidadesTest {
     Vehiculo vehiculo2;
     VehiculoController vehiculoController;
     VehiculoModelo vehiculoModelo;
+    Fichero fichero;
 
     @BeforeEach
     public void setUp() {
@@ -40,7 +42,9 @@ public class VehiculoControllerTest extends UtilidadesTest {
         } catch (VehiculoException e) {
             fail("Error al insertar BeforeEach");
         }
-
+        if (vehiculoModelo == null) {
+            vehiculoModelo = new VehiculoModelo();
+        }
     }
 
     @AfterEach
@@ -75,10 +79,10 @@ public class VehiculoControllerTest extends UtilidadesTest {
     public void insertarTest() {
         try {
             vehiculoController.insertar(vehiculo);
+            System.out.println(vehiculo.getMatricula());
             assertEquals(vehiculo, vehiculoController.mostrarVehiculo(vehiculo.getMatricula()), "El vehículo no ha sido insertado correctamente.");
-
         } catch (FicheroException e) {
-            fail("Ha ocurrido un error al insertar.");
+            fail(e.getMessage());
         } catch (VehiculoException e) {
             fail("Fallo al insertar");
         }

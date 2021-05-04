@@ -24,10 +24,25 @@ public class Fichero {
         listado = obtenerListado();
         listado.add(vehiculo);
         try {
-            crear(NOMBRE_FICHERO, listado.toString());
+            crear(NOMBRE_FICHERO, obtenerLista(listado));
         } catch (FicheroException exception) {
             throw new FicheroException(SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO, exception);
         }
+    }
+
+    /**
+     * Funcion para obtener una lista de vehiculos
+     * @param listado array
+     * @return un string.
+     */
+    private String obtenerLista(ArrayList<Vehiculo> listado) {
+        String lista = "";
+        int i = 0;
+        while (i<listado.size()) {
+            lista += listado.get(i).toString() +RETORNO_CARRO;
+            ++i;
+        }
+        return lista;
     }
 
     /**
@@ -41,7 +56,7 @@ public class Fichero {
         listado = obtenerListado();
         listado.remove(vehiculo);
         try {
-            crear(NOMBRE_FICHERO, listado.toString());
+            crear(NOMBRE_FICHERO, obtenerLista(listado));
         } catch (FicheroException exception) {
             throw new FicheroException(SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO, exception);
         }
@@ -51,7 +66,7 @@ public class Fichero {
      * Metodo encargado de modificar un elemento del fichero
      * 
      * @param VehiculoAlamcenada elemento a actualizar
-     * @param Vehiculo           elemento con la informacion actualizada
+     * @param Vehiculo elemento con la informacion actualizada
      * @throws FicheroException
      */
     public void modificar(Vehiculo vehiculoAlmacenada, Vehiculo vehiculo) throws FicheroException {
@@ -60,7 +75,7 @@ public class Fichero {
         posicion = listado.indexOf(vehiculoAlmacenada);
         listado.remove(posicion);
         listado.add(posicion, vehiculo);
-        crear(NOMBRE_FICHERO, listado.toString());
+        crear(NOMBRE_FICHERO, obtenerLista(listado));
 
     }
 
@@ -83,8 +98,10 @@ public class Fichero {
             scanner = new Scanner(fichero);
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine(); // Guardamos la linea en un String
-                Vehiculo vehiculo = new Vehiculo(linea);
-                lista.add(vehiculo);
+                if (!linea.isEmpty()) {
+                    Vehiculo vehiculo = new Vehiculo(linea);
+                    lista.add(vehiculo);
+                }
             }
         } catch (FicheroException e) {
             throw e;
@@ -100,41 +117,6 @@ public class Fichero {
     }
 
     /**
-     * Funcion encargada de leer un ficher
-     * 
-     * @param nombre nombre del fichero a leer
-     * @throws FicheroException Error controlado en la lectura del fichero
-     */
-    public String leer(String nombre) throws FicheroException {
-        StringBuilder informacion = null;
-        File fichero = null;
-        Scanner scanner = null;
-
-        try {
-            fichero = new File(nombre);
-            if (!validarFichero(fichero)) {
-                throw new FicheroException("El fichero a leer no existe");
-            }
-            informacion = new StringBuilder();
-            scanner = new Scanner(fichero);
-
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine(); // Guardamos la linea en un String
-                informacion.append(linea + RETORNO_CARRO);
-            }
-        } catch (FicheroException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new FicheroException("Se ha producido un error en la lectura del fichero", e);
-        } finally {
-            if (scanner != null) {
-                scanner.close();
-            }
-        }
-        return informacion.toString();
-    }
-
-    /**
      * Metodo encargado de crear un fichero
      * 
      * @param nombre del fichero a crear
@@ -144,7 +126,7 @@ public class Fichero {
         FileWriter fichero = null;
         try {
             fichero = new FileWriter(nombre);
-            fichero.write(cadenaTexto + "\n");
+            fichero.write(cadenaTexto + RETORNO_CARRO);
         } catch (Exception ex) {
             throw new FicheroException("Se ha producido un error en la escritura del fichero", ex);
         } finally {
@@ -186,7 +168,7 @@ public class Fichero {
     }
 
     /**
-     * Funcion que verifica si se trata de un directorio no
+     * Funcion que verifica si se trata de un directorio noFichero-Usarios
      * 
      * @param path de la ruta a validad
      * @return boolean Si/No se trata de un directorio

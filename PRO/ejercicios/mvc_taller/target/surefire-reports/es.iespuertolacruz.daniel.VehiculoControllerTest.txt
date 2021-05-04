@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: es.iespuertolacruz.daniel.VehiculoControllerTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.117 s <<< FAILURE! - in es.iespuertolacruz.daniel.VehiculoControllerTest
-insertarTest  Time elapsed: 0.029 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Ha ocurrido un error al insertar.
-	at es.iespuertolacruz.daniel.VehiculoControllerTest.insertarTest(VehiculoControllerTest.java:81)
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in es.iespuertolacruz.daniel.VehiculoControllerTest
+insertarTest  Time elapsed: 0.013 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: El vehículo no ha sido insertado correctamente. ==> expected: <Vehiculo [marca=FORD, matricula=2222BBB]> but was: <null>
+	at es.iespuertolacruz.daniel.VehiculoControllerTest.insertarTest(VehiculoControllerTest.java:82)
 

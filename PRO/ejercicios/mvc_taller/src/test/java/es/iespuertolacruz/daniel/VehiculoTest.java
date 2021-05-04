@@ -18,7 +18,7 @@ public class VehiculoTest extends UtilidadesTest {
     
     @Test
     public void validarVehiculo(){
-        Vehiculo vehiculo3 = new Vehiculo("3333CCC");
+        Vehiculo vehiculo3 = new Vehiculo("3333CCC" , "");
         assertEquals("2222BBB", vehiculo.getMatricula(), "Error al comparar la matricula del vehiculo.");
         assertEquals("Toyota", vehiculo.getMarca(), "Error al comparar la marca del vehiculo.");
         assertEquals(MATRICULA, vehiculo2.getMatricula(), "Error al comparar la matricula del vehiculo.");
