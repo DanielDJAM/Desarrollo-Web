@@ -1,5 +1,7 @@
 package es.iespuertolacruz.daniel.controller;
 
+import java.util.ArrayList;
+
 import es.iespuertolacruz.daniel.api.Vehiculo;
 import es.iespuertolacruz.daniel.excepcion.FicheroException;
 import es.iespuertolacruz.daniel.excepcion.VehiculoException;
@@ -39,19 +41,22 @@ public class VehiculoController {
      */
     public void insertar(Vehiculo vehiculo) throws VehiculoException, FicheroException{
         validar(vehiculo);
-        if (existe(vehiculo.getMatricula())) {
-            throw new VehiculoException("El vehiculo se encuentra almacenado");
+        if (!existe(vehiculo.getMatricula())) {
+            vehiculoModelo.insertar(vehiculo);
         }
-        vehiculoModelo.insertar(vehiculo);
     }
 
     /**
      * Metodo para eliminar de la clase VehiculoController.
      * @param vehiculo a eliminar.
      * @throws FicheroException
+     * @throws VehiculoException
      */
-    public void eliminar(Vehiculo vehiculo) throws FicheroException {
-        vehiculoModelo.eliminar(vehiculo);
+    public void eliminar(Vehiculo vehiculo) throws FicheroException, VehiculoException {
+        validar(vehiculo);
+        if (existe(vehiculo.getMatricula())) {
+            vehiculoModelo.eliminar(vehiculo);
+        }
     }
 
     /**
@@ -71,6 +76,14 @@ public class VehiculoController {
      */
     public Vehiculo mostrarVehiculo(String matricula) throws FicheroException {
        return vehiculoModelo.mostrarVehiculo(matricula);
+    }
+
+    /**
+     * Metodo que llama a una funcion para mostrar la lista de todos los vehiculos
+     * @throws FicheroException
+     */
+    public ArrayList<Vehiculo> mostrarTodos() throws FicheroException{
+        return vehiculoModelo.mostrarTodos();
     }
 
     /**

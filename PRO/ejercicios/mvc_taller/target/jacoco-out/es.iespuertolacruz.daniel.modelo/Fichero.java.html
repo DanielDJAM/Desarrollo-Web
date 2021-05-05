@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Fichero.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mvc_taller</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel.modelo</a> &gt; <span class="el_source">Fichero.java</span></div><h1>Fichero.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel.modelo;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import es.iespuertolacruz.daniel.api.Vehiculo;
+import es.iespuertolacruz.daniel.excepcion.FicheroException;
+
+<span class="fc" id="L10">public class Fichero {</span>
+
+    private static final String SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO = &quot;Se ha producido un error en el volcado del fichero&quot;;
+    private static final String RETORNO_CARRO = &quot;\n&quot;;
+    private static final String NOMBRE_FICHERO = &quot;Fichero-Usarios.txt&quot;;
+
+    /**
+     * Metodo encargado de almacenar una vehiculo en el fichero
+     * 
+     * @param vehiculo a insertar
+     * @throws FicheroException controlado
+     */
+    public void insertar(Vehiculo vehiculo) throws FicheroException {
+        ArrayList&lt;Vehiculo&gt; listado;
+<span class="fc" id="L24">        listado = obtenerListado();</span>
+<span class="fc" id="L25">        listado.add(vehiculo);</span>
+        try {
+<span class="fc" id="L27">            crear(NOMBRE_FICHERO, obtenerLista(listado));</span>
+<span class="nc" id="L28">        } catch (FicheroException exception) {</span>
+<span class="nc" id="L29">            throw new FicheroException(SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO, exception);</span>
+<span class="fc" id="L30">        }</span>
+<span class="fc" id="L31">    }</span>
+
+    /**
+     * Funcion para obtener una lista de vehiculos
+     * @param listado array
+     * @return un string.
+     */
+    public String obtenerLista(ArrayList&lt;Vehiculo&gt; listado) {
+<span class="fc" id="L39">        String lista = &quot;&quot;;</span>
+<span class="fc" id="L40">        int i = 0;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        while (i&lt;listado.size()) {</span>
+<span class="fc" id="L42">            lista += listado.get(i).toString() +RETORNO_CARRO;</span>
+<span class="fc" id="L43">            ++i;</span>
+        }
+<span class="fc" id="L45">        return lista;</span>
+    }
+
+    /**
+     * Metodo encargado de eliminar una Vehiculo del fichero
+     * 
+     * @param Vehiculo a eliminar
+     * @throws FicheroException error controlado
+     */
+    public void eliminar(Vehiculo vehiculo) throws FicheroException {
+        ArrayList&lt;Vehiculo&gt; listado;
+<span class="fc" id="L56">        listado = obtenerListado();</span>
+<span class="fc" id="L57">        listado.remove(vehiculo);</span>
+        try {
+<span class="fc" id="L59">            crear(NOMBRE_FICHERO, obtenerLista(listado));</span>
+<span class="nc" id="L60">        } catch (FicheroException exception) {</span>
+<span class="nc" id="L61">            throw new FicheroException(SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO, exception);</span>
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Metodo encargado de modificar un elemento del fichero
+     * 
+     * @param VehiculoAlamcenada elemento a actualizar
+     * @param Vehiculo elemento con la informacion actualizada
+     * @throws FicheroException
+     */
+    public void modificar(Vehiculo vehiculoAlmacenada, Vehiculo vehiculo) throws FicheroException {
+<span class="fc" id="L73">        ArrayList&lt;Vehiculo&gt; listado = obtenerListado();</span>
+<span class="fc" id="L74">        int posicion = -1;</span>
+<span class="fc" id="L75">        posicion = listado.indexOf(vehiculoAlmacenada);</span>
+<span class="fc" id="L76">        listado.remove(posicion);</span>
+<span class="fc" id="L77">        listado.add(posicion, vehiculo);</span>
+        try {
+<span class="fc" id="L79">            crear(NOMBRE_FICHERO, obtenerLista(listado));</span>
+<span class="nc" id="L80">        } catch (FicheroException exception) {</span>
+<span class="nc" id="L81">            throw new FicheroException(SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO, exception);</span>
+<span class="fc" id="L82">        }</span>
+
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Funcion encargada de obtener el listado de Vehiculos del fichero
+     * 
+     * @return listado de Vehiculos
+     * @throws FicheroException
+     */
+    public ArrayList&lt;Vehiculo&gt; obtenerListado() throws FicheroException {
+<span class="fc" id="L93">        ArrayList&lt;Vehiculo&gt; lista = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L94">        File fichero = null;</span>
+<span class="fc" id="L95">        Scanner scanner = null;</span>
+
+        try {
+<span class="fc" id="L98">            fichero = new File(NOMBRE_FICHERO);</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">            if (!validarFichero(fichero)) {</span>
+<span class="nc" id="L100">                throw new FicheroException(&quot;El fichero a leer no existe&quot;);</span>
+            }
+<span class="fc" id="L102">            scanner = new Scanner(fichero);</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">            while (scanner.hasNextLine()) {</span>
+<span class="fc" id="L104">                String linea = scanner.nextLine(); // Guardamos la linea en un String</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">                if (!linea.isEmpty()) {</span>
+<span class="fc" id="L106">                    Vehiculo vehiculo = new Vehiculo(linea);</span>
+<span class="fc" id="L107">                    lista.add(vehiculo);</span>
+                }
+<span class="fc" id="L109">            }</span>
+<span class="nc" id="L110">        } catch (FicheroException e) {</span>
+<span class="nc" id="L111">            throw e;</span>
+<span class="nc" id="L112">        } catch (Exception e) {</span>
+<span class="nc" id="L113">            throw new FicheroException(&quot;Se ha producido un error en la lectura del fichero&quot;, e);</span>
+        } finally {
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (scanner != null) {</span>
+<span class="fc" id="L116">                scanner.close();</span>
+            }
+        }
+
+<span class="fc" id="L120">        return lista;</span>
+    }
+
+    /**
+     * Metodo encargado de crear un fichero
+     * 
+     * @param nombre del fichero a crear
+     * @throws FicheroException
+     */
+    public void crear(String nombre, String cadenaTexto) throws FicheroException {
+<span class="fc" id="L130">        FileWriter fichero = null;</span>
+        try {
+<span class="fc" id="L132">            fichero = new FileWriter(nombre);</span>
+<span class="fc" id="L133">            fichero.write(cadenaTexto + RETORNO_CARRO);</span>
+<span class="nc" id="L134">        } catch (Exception ex) {</span>
+<span class="nc" id="L135">            throw new FicheroException(&quot;Se ha producido un error en la escritura del fichero&quot;, ex);</span>
+        } finally {
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">            if (fichero != null) {</span>
+                try {
+<span class="fc" id="L139">                    fichero.close();</span>
+<span class="nc" id="L140">                } catch (IOException e) {</span>
+<span class="nc" id="L141">                    throw new FicheroException(&quot;No ha sido podible cerrar el fichero&quot;, e);</span>
+<span class="fc" id="L142">                }</span>
+            }
+        }
+
+<span class="fc" id="L146">    }</span>
+
+    /**
+     * Funcion que verifica si el fichero existo
+     * 
+     * @param fichero
+     * @return
+     */
+    public boolean validarFichero(File fichero) {
+<span class="fc" id="L155">        return fichero.exists();</span>
+    }
+
+    /**
+     * Metodo encargado de elimianr un fichero/directorio
+     * 
+     * @param nombre del fichero/directorio a elimina
+     * @throws FicheroException error controlado
+     */
+    public void eliminar(String nombre) throws FicheroException {
+<span class="fc" id="L165">        File fichero = new File(nombre);</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (validarFichero(fichero)) {</span>
+<span class="fc" id="L167">            fichero.delete();</span>
+        } else {
+<span class="fc" id="L169">            throw new FicheroException(&quot;No se puede eliminar un fichero que no existe&quot;);</span>
+        }
+
+<span class="fc" id="L172">    }</span>
+
+    /**
+     * Funcion encargada de obtener un vehiculo
+     * 
+     * @param matricula del vehiculo
+     * @return Objeto vehiculo
+     * @throws FicheroException
+     */
+    public Vehiculo buscar(String matricula) throws FicheroException {
+<span class="fc" id="L182">        Vehiculo vehiculo = null;</span>
+<span class="fc" id="L183">        ArrayList&lt;Vehiculo&gt; listado = obtenerListado();</span>
+<span class="fc" id="L184">        int i = 0;</span>
+
+<span class="fc bfc" id="L186" title="All 4 branches covered.">        while (i &lt; listado.size() &amp;&amp; vehiculo == null) {</span>
+<span class="pc bpc" id="L187" title="1 of 4 branches missed.">            if (matricula.equals(listado.get(i).getMatricula()) || matricula.equals(listado.get(i).getMarca())) {</span>
+<span class="fc" id="L188">                vehiculo = listado.get(i);</span>
+            }
+<span class="fc" id="L190">            i++;</span>
+        }
+<span class="fc" id="L192">        return vehiculo;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

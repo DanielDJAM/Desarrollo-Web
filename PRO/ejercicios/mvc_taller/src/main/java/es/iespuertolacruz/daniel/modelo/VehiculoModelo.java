@@ -1,5 +1,7 @@
 package es.iespuertolacruz.daniel.modelo;
 
+import java.util.ArrayList;
+
 import es.iespuertolacruz.daniel.api.Vehiculo;
 import es.iespuertolacruz.daniel.excepcion.FicheroException;
 
@@ -53,9 +55,13 @@ public class VehiculoModelo {
         vehiculo = fichero.buscar(matricula);
         return vehiculo;
     }
-    /** 
-    public String mostrarTodo(Vehiculo vehiculo){
-        
+
+    /**
+     * Funcion para listar todos los vehiculos
+     * @return devuelve la lista de todos los vehiculos.
+     * @throws FicheroException
+     */
+    public ArrayList<Vehiculo> mostrarTodos() throws FicheroException{
+        return fichero.obtenerListado();
     }
-    */
 }

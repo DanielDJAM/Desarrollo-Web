@@ -35,7 +35,7 @@ public class Fichero {
      * @param listado array
      * @return un string.
      */
-    private String obtenerLista(ArrayList<Vehiculo> listado) {
+    public String obtenerLista(ArrayList<Vehiculo> listado) {
         String lista = "";
         int i = 0;
         while (i<listado.size()) {
@@ -75,7 +75,11 @@ public class Fichero {
         posicion = listado.indexOf(vehiculoAlmacenada);
         listado.remove(posicion);
         listado.add(posicion, vehiculo);
-        crear(NOMBRE_FICHERO, obtenerLista(listado));
+        try {
+            crear(NOMBRE_FICHERO, obtenerLista(listado));
+        } catch (FicheroException exception) {
+            throw new FicheroException(SE_HA_PRODUCIDO_UN_ERROR_EN_EL_VOLCADO_DEL_FICHERO, exception);
+        }
 
     }
 
@@ -165,17 +169,6 @@ public class Fichero {
             throw new FicheroException("No se puede eliminar un fichero que no existe");
         }
 
-    }
-
-    /**
-     * Funcion que verifica si se trata de un directorio noFichero-Usarios
-     * 
-     * @param path de la ruta a validad
-     * @return boolean Si/No se trata de un directorio
-     */
-    public boolean esDirectorio(String path) {
-        File fichero = new File(path);
-        return fichero.isDirectory();
     }
 
     /**

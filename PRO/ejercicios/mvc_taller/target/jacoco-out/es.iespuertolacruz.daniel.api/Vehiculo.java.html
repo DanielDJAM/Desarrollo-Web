@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Vehiculo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mvc_taller</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel.api</a> &gt; <span class="el_source">Vehiculo.java</span></div><h1>Vehiculo.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel.api;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.StringTokenizer;
+
+public class Vehiculo {
+
+    private String matricula;
+    private String marca;
+
+    private static final String DELIMITADOR = &quot;,&quot;;
+
+    /**
+     * Constructor por defecto de la clase Vehiculo.
+     */
+<span class="fc" id="L17">    public Vehiculo() {</span>
+
+<span class="fc" id="L19">    }</span>
+
+    /**
+    * Constructor que recibe una cadena de text
+    * @param cadena con la informacion
+    */
+<span class="fc" id="L25">    public Vehiculo(String cadena) {</span>
+<span class="fc" id="L26">        ArrayList&lt;Object&gt; elementos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L27">        StringTokenizer tokenizer = new StringTokenizer(cadena, DELIMITADOR);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        while (tokenizer.hasMoreElements()) {</span>
+<span class="fc" id="L29">            elementos.add(tokenizer.nextToken());</span>
+        }
+<span class="fc" id="L31">        this.matricula = (String) elementos.get(0);</span>
+<span class="fc" id="L32">        this.marca = (String) elementos.get(1);</span>
+<span class="fc" id="L33">    }</span>
+
+    /**
+     * Constructor con todos los parametros de la clase vehiculo.
+     * 
+     * @param matricula del vehiculo.
+     * @param marca     del vehiculo.
+     */
+<span class="fc" id="L41">    public Vehiculo(String matricula, String marca) {</span>
+<span class="fc" id="L42">        this.matricula = matricula;</span>
+<span class="fc" id="L43">        this.marca = marca;</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Getters y Setters de la clase Vehiculo.
+     */
+    public String getMatricula() {
+<span class="fc" id="L50">        return matricula;</span>
+    }
+
+    public void setMatricula(String matricula) {
+<span class="fc" id="L54">        this.matricula = matricula;</span>
+<span class="fc" id="L55">    }</span>
+
+    public String getMarca() {
+<span class="fc" id="L58">        return marca;</span>
+    }
+
+    public void setMarca(String marca) {
+<span class="fc" id="L62">        this.marca = marca;</span>
+<span class="fc" id="L63">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L67">        return getMatricula() + DELIMITADOR + getMarca();</span>
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (o == this)</span>
+<span class="nc" id="L74">            return true;</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (!(o instanceof Vehiculo)) {</span>
+<span class="nc" id="L76">            return false;</span>
+        }
+<span class="fc" id="L78">        Vehiculo vehiculo = (Vehiculo) o;</span>
+<span class="pc bpc" id="L79" title="1 of 4 branches missed.">        return Objects.equals(matricula, vehiculo.matricula) &amp;&amp; Objects.equals(marca, vehiculo.marca);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -4,7 +4,7 @@ import es.iespuertolacruz.daniel.api.Vehiculo;
 
 public class UtilidadesTest {
 
-    protected static final String MARCA = "FORD";
+    protected static final String MARCA = "TOYOTA";
     protected static final String MATRICULA = "1111AAA";
 
     protected Vehiculo crearVehiculo(String matricula, String marca){
