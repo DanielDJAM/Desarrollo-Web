@@ -11,35 +11,36 @@ public class VehiculoController {
 
     VehiculoModelo vehiculoModelo;
 
-    public VehiculoController(){
+    public VehiculoController() {
         vehiculoModelo = new VehiculoModelo();
     }
 
-    public void validar(Vehiculo vehiculo) throws VehiculoException{
+    public void validar(Vehiculo vehiculo) throws VehiculoException {
         String mensaje = "";
 
-        if (vehiculo == null){
+        if (vehiculo == null) {
             mensaje = "El objeto a validar es nulo";
             throw new VehiculoException(mensaje);
         }
-        if (vehiculo.getMatricula() == null || vehiculo.getMatricula().isEmpty()){
+        if (vehiculo.getMatricula() == null || vehiculo.getMatricula().isEmpty()) {
             mensaje = "La matricula es nula o vacia,";
         }
-        if (vehiculo.getMarca() == null || vehiculo.getMarca().isEmpty()){
+        if (vehiculo.getMarca() == null || vehiculo.getMarca().isEmpty()) {
             mensaje += "La marca es nula o vacia.";
         }
-        if (!mensaje.isEmpty()){
+        if (!mensaje.isEmpty()) {
             throw new VehiculoException(mensaje);
         }
     }
 
     /**
      * Metodo insertar de la clase VehiculoController.
+     * 
      * @param vehiculo a insertar.
      * @throws FicheroException
      * @throws VehiculoException
      */
-    public void insertar(Vehiculo vehiculo) throws VehiculoException, FicheroException{
+    public void insertar(Vehiculo vehiculo) throws VehiculoException, FicheroException {
         validar(vehiculo);
         if (!existe(vehiculo.getMatricula())) {
             vehiculoModelo.insertar(vehiculo);
@@ -48,6 +49,7 @@ public class VehiculoController {
 
     /**
      * Metodo para eliminar de la clase VehiculoController.
+     * 
      * @param vehiculo a eliminar.
      * @throws FicheroException
      * @throws VehiculoException
@@ -61,7 +63,8 @@ public class VehiculoController {
 
     /**
      * Metodo para modificar de la clase VehiculoController.
-     * @param vehiculo a modificar.
+     * 
+     * @param vehiculo  a modificar.
      * @param vehiculo2 vehiculo con modificaciones.
      * @throws FicheroException
      */
@@ -71,39 +74,39 @@ public class VehiculoController {
 
     /**
      * Metodo para mostrar/buscar un solo vehiculo de la clase VehiculoController.
+     * 
      * @param vehiculo a buscar.
      * @throws FicheroException
      */
     public Vehiculo mostrarVehiculo(String matricula) throws FicheroException {
-       return vehiculoModelo.mostrarVehiculo(matricula);
+        return vehiculoModelo.mostrarVehiculo(matricula);
     }
 
     /**
      * Metodo que llama a una funcion para mostrar la lista de todos los vehiculos
+     * 
      * @throws FicheroException
      */
-    public ArrayList<Vehiculo> mostrarTodos() throws FicheroException{
+    public ArrayList<Vehiculo> mostrarTodos() throws FicheroException {
         return vehiculoModelo.mostrarTodos();
     }
 
     /**
-    * Funcion que verifica si un vehiculo existe 
-    * @param matricula a encontrar
-    * @return true/false
+     * Funcion que verifica si un vehiculo existe
+     * 
+     * @param matricula a encontrar
+     * @return true/false
      * @throws FicheroException
-    */
-   public boolean existe(String matricula) throws FicheroException {
-    boolean encontrado = false;
-    Vehiculo vehiculo = null;
+     */
+    public boolean existe(String matricula) throws FicheroException {
+        boolean encontrado = false;
+        Vehiculo vehiculo = null;
 
-    vehiculo = mostrarVehiculo(matricula);
-    if (vehiculo !=null) {
-       encontrado = true;
+        vehiculo = mostrarVehiculo(matricula);
+        if (vehiculo != null) {
+            encontrado = true;
+        }
+        return encontrado;
     }
-    return encontrado;
- }
 
-
-
-    
 }
