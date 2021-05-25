@@ -1,0 +1,11 @@
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/modelo/Bbdd.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/excepcion/FicheroException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/App.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/modelo/Fichero.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/modelo/DatosPersonalesModelo.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/controller/DatosPersonalesController.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/excepcion/PersistenciaException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/api/DatosPersonales.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/excepcion/BbddException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/excepcion/DatosPersonalesException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/censo/src/main/java/es/iespuertolacruz/daniel/modelo/SqliteDdbb.java
