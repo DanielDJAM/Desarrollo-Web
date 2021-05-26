@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CensoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pruebadb</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel.controller</a> &gt; <span class="el_source">CensoController.java</span></div><h1>CensoController.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel.controller;
+
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import es.iespuertolacruz.daniel.api.Censo;
+import es.iespuertolacruz.daniel.excepcion.CensoException;
+import es.iespuertolacruz.daniel.excepcion.FicheroException;
+import es.iespuertolacruz.daniel.excepcion.PersistenciaException;
+import es.iespuertolacruz.daniel.modelo.CensoModelo;
+
+public class CensoController {
+
+    private static final String EL_DNI_ESTA_VACIO = &quot;El dni esta vacio&quot;;
+    CensoModelo censoModelo;
+
+    /**
+     * Constructor por defecto de la clase CensoController
+     * @throws PersistenciaException
+     * @throws FicheroException
+     * @throws SQLException
+     */
+<span class="fc" id="L24">    public CensoController() throws PersistenciaException, FicheroException, SQLException{</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (censoModelo == null) {</span>
+<span class="fc" id="L26">            censoModelo = new CensoModelo();</span>
+        }
+<span class="fc" id="L28">    }</span>
+
+    /**
+     * Metodo para validar censos
+     * @param censo a validar
+     * @throws CensoException
+     */
+    public void validar(Censo censo) throws CensoException{
+<span class="fc" id="L36">        String mensaje = &quot;&quot;;</span>
+
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (censo == null){</span>
+<span class="nc" id="L39">            mensaje = &quot;El censo es nulo&quot;;</span>
+<span class="nc" id="L40">            throw new CensoException(mensaje);</span>
+        }
+<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        if(censo.getDni() == null || censo.getDni().isEmpty()) {</span>
+<span class="nc" id="L43">            mensaje = &quot;El dni es nulo o vacio,&quot;;</span>
+        }
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if(censo.getDni() != null) {</span>
+<span class="fc" id="L46">            validarDni(censo.getDni());</span>
+        }
+<span class="pc bpc" id="L48" title="2 of 4 branches missed.">        if (censo.getNombre() == null || censo.getNombre().isEmpty()) {</span>
+<span class="nc" id="L49">            mensaje += &quot;El nombre es nulo o vacio,&quot;;</span>
+        }
+<span class="pc bpc" id="L51" title="2 of 4 branches missed.">        if (censo.getFecha() == null || censo.getFecha().isEmpty()) {</span>
+<span class="nc" id="L52">            mensaje += &quot;La fecha es nula o vacia,&quot;;</span>
+        }
+<span class="pc bpc" id="L54" title="2 of 4 branches missed.">        if (censo.getDireccion() == null || censo.getDireccion().isEmpty()) {</span>
+<span class="nc" id="L55">            mensaje += &quot;La id_direccion esta vacia&quot;;</span>
+        }
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (censo.getTelefono() == 0) {</span>
+<span class="nc" id="L58">            mensaje += &quot;Los datos de la persona estan vacios &quot;;</span>
+        }
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if(!mensaje.isEmpty()) {</span>
+<span class="nc" id="L61">            throw new CensoException(mensaje);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Metodo para insertar un censo
+     * @param censo a insertar
+     * @throws CensoException
+     * @throws FicheroException
+     * @throws PersistenciaException
+     */
+    public void insertar(Censo censo) throws CensoException, PersistenciaException {
+<span class="fc" id="L73">        validar(censo);</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if(existe(censo)) {</span>
+<span class="nc" id="L75">            throw new CensoException(&quot;La persona ya existe&quot;);</span>
+        }
+<span class="fc" id="L77">        censoModelo.insertar(censo);</span>
+<span class="fc" id="L78">    }</span>
+
+    /**
+     * Metodo para eliminar un censo
+     * @param censo a eliminar
+     * @throws FicheroException
+     * @throws CensoException
+     * @throws PersistenciaException
+     */
+    public void eliminar(Censo censo) throws  CensoException, PersistenciaException{
+<span class="fc" id="L88">        validar(censo);</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (!existe(censo)) {</span>
+<span class="nc" id="L90">          throw new CensoException(&quot;La persona no existe&quot;);</span>
+        }
+<span class="fc" id="L92">        censoModelo.eliminar(censo);</span>
+<span class="fc" id="L93">    }</span>
+
+    /**
+     * Metodo para modificar de la clase CensoController.
+     * 
+     * @param censo  a modificar.
+     * @param censo2 censo con modificaciones.
+     * @throws FicheroException
+     * @throws PersistenciaException
+     * @throws CensoException
+     */
+    public void modificar(Censo censo) throws  PersistenciaException, CensoException{
+<span class="fc" id="L105">        validar(censo);</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if(!existe(censo)){</span>
+<span class="nc" id="L107">            throw new CensoException(&quot;La persona no se encuentra o no existe&quot;);</span>
+        }
+<span class="fc" id="L109">        censoModelo.modificar(censo);</span>
+<span class="fc" id="L110">    }</span>
+
+    /**
+     * Funcion que busca un censo por su dni
+     * @param dni del censo a buscar
+     * @return un censo
+     * @throws CensoException
+     * @throws FicheroException
+     * @throws PersistenciaException
+     */
+    public Censo buscar(String dni) throws CensoException, PersistenciaException {
+<span class="fc" id="L121">        Censo censo = null;</span>
+<span class="pc bpc" id="L122" title="2 of 4 branches missed.">        if (dni == null || dni.isEmpty()) {</span>
+<span class="nc" id="L123">            throw new CensoException(EL_DNI_ESTA_VACIO);</span>
+        }
+<span class="fc" id="L125">        censo = censoModelo.buscarCenso(dni);</span>
+<span class="fc" id="L126">        return censo;</span>
+    }
+
+    /**
+     * Funcion que verifica si existe un censo
+     * @param dni por el que se busca
+     * @return True/false si se ha encontrado
+     * @throws CensoException
+     * @throws FicheroException
+     * @throws PersistenciaException
+     */
+    public boolean existe(Censo censo) throws CensoException, PersistenciaException {
+<span class="fc" id="L138">        boolean encontrado = false;</span>
+        Censo censoEncontrado;
+<span class="fc" id="L140">        censoEncontrado = buscar(censo.getDni());</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (censoEncontrado != null) {</span>
+<span class="fc" id="L142">            encontrado = true;</span>
+        }
+<span class="fc" id="L144">        return encontrado;</span>
+    }
+
+    public void validarDni(String dni) throws CensoException{
+<span class="fc" id="L148">        Pattern patron = Pattern.compile(&quot;^[0-9]{8}[A-Za-z]$&quot;);</span>
+<span class="fc" id="L149">        Matcher valido = patron.matcher(dni);</span>
+
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (!valido.matches()){</span>
+<span class="nc" id="L152">            throw new CensoException(&quot;Error al validar el dni&quot;);</span>
+        }
+<span class="fc" id="L154">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

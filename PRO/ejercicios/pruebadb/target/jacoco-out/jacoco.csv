@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+pruebadb,es.iespuertolacruz.daniel.modelo,CensoModelo,13,140,0,4,4,46,1,8,1,6
+pruebadb,es.iespuertolacruz.daniel.modelo,Bbdd,44,113,5,9,11,39,4,8,0,5
+pruebadb,es.iespuertolacruz.daniel.modelo,Fichero,95,0,8,0,32,0,8,0,4,0
+pruebadb,es.iespuertolacruz.daniel.modelo,SqliteDb,7,7,0,0,2,2,1,1,1,1
+pruebadb,es.iespuertolacruz.daniel.controller,CensoController,51,131,19,21,13,40,19,9,0,8
+pruebadb,es.iespuertolacruz.daniel.api,Censo,17,97,7,7,3,28,8,13,1,13
+pruebadb,es.iespuertolacruz.daniel.excepcion,PersistenciaException,9,0,0,0,4,0,2,0,2,0
+pruebadb,es.iespuertolacruz.daniel.excepcion,FicheroException,9,0,0,0,4,0,2,0,2,0
+pruebadb,es.iespuertolacruz.daniel.excepcion,CensoException,9,0,0,0,4,0,2,0,2,0

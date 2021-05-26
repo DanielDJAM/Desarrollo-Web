@@ -3,7 +3,6 @@ package es.iespuertolacruz.daniel.modelo;
 import java.sql.*;
 import java.util.ArrayList;
 
-import es.iespuertolacruz.daniel.api.Censo;
 import es.iespuertolacruz.daniel.excepcion.PersistenciaException;
 
 public class Bbdd {
@@ -45,11 +44,7 @@ public class Bbdd {
             + "direccion VARCHAR(50),"
             + "telefono INT(20));";
            update(sqlCrearTabla);
-           //Extraer de fichero las sentencias sql para insertar en la BBDD
-           //String sqlInsertarDatos = null;
-           //update(sqlInsertarDatos);
-           //Insertar datos
-        }
+         }
 
       } catch (Exception e) {
          throw new PersistenciaException("Se ha producido un error en la inicializacion de la BBDD", e);
@@ -82,99 +77,6 @@ public class Bbdd {
    }
 
    /**
-    * Funcion encargada de obtener un censo
-    * 
-    * @param identificador del censo
-    * @return Objeto censo
-    * @throws PersistenciaException
-    */
-   public Censo buscarCenso(String identificador) throws PersistenciaException {
-      Censo censo = null;
-      String sql = "SELECT * FROM "+TABLE_NAME+" WHERE dni='"+identificador+"'";
-      ArrayList<Censo> lista = buscar(sql);
-      if (!lista.isEmpty()) {
-         censo = lista.get(0);
-      }
-      return censo;
-   }
-
-   /**
-    * Funcion que obtiene todos los usuarios de la BBDD
-    * @return lista usuarios
-    * @throws PersistenciaException error controlado
-    */
-    public ArrayList<Censo> buscarTodos() throws PersistenciaException {
-      String sql = "SELECT * FROM " + TABLE_NAME;
-      return buscar(sql);
-   }
-   /**
-    * Funcion que realiza una consulta sobre una sentencia sql dada
-    * @param sql de la consulta
-    * @return lista resultados (0..n) Usuasios
-    * @throws PersistenciaException error controlado
-    */
-   private ArrayList<Censo> buscar(String sql) throws PersistenciaException {
-      ArrayList<Censo> lista = new ArrayList<>();
-      PreparedStatement statement = null;
-      ResultSet resultSet = null;
-      Connection connection = null;
-      try {
-         connection = getConnection();
-         statement = connection.prepareStatement(sql);
-         resultSet = statement.executeQuery();
-
-         while(resultSet.next()) {
-            Censo censo = new Censo();
-            censo.setDni(resultSet.getString("dni"));
-            censo.setNombre(resultSet.getString("nombre"));
-            censo.setFecha(resultSet.getString("fecha"));
-            censo.setDireccion(resultSet.getString("direccion"));
-            censo.setTelefono(resultSet.getInt("telefono"));
-            lista.add(censo);
-         }
-      } catch (SQLException exception) {
-         throw new PersistenciaException("Se ha producido un error en la busqueda", exception);
-      } finally {
-         closeConecction(connection, statement, resultSet);
-      }
-      return lista;
-   }
-
-
-   /**
-    * Metodo encargado de realizar la insercion en la BBDD
-    * 
-    * @param usuario a insertar
-    * @throws PersistenciaException
-    */
-   public void insertar(Censo censo) throws PersistenciaException {
-      String sql = "INSERT INTO censo (dni, nombre, fecha, direccion, telefono) VALUES ('"+censo.getDni()+"','"+censo.getNombre()+"','"+censo.getFecha()+"','"
-      +censo.getDireccion()+"','"+censo.getTelefono()+"')";
-      update(sql);
-   }
-
-   /**
-    * Metodo encargado de realizar la actualizacion de un censo
-    * @param censo a actualizar
-    * @throws PersistenciaException error controlado
-    */
-   public void update(Censo censo) throws PersistenciaException {
-      String sql = "UPDATE censo set dni = '" + censo.getDni() + "',  nombre = '" + censo.getNombre()
-            + "',  fecha = '" + censo.getFecha() +"', direccion = '" +censo.getDireccion()+"', telefono ='"+censo.getTelefono()+"' WHERE dni = '" + censo.getDni()+"'";
-      update(sql);
-   }
-   /**
-    * Metodo encargado de realizar la actualizacion en la BBDD
-    * 
-    * @param censo a actualizar
-    * @throws PersistenciaException
-    */
-   public void eliminar(String identificador) throws PersistenciaException {
-      String sql = "DELETE FROM censo WHERE dni = '" + identificador + "'";
-      update(sql);
-   }
-
-   /**
     * Metodo encargado de realizar las inserciones/modificaciones/eliminacion de la BBDD
     * @param sql con la sentencia
     * @throws PersistenciaException error controlado
@@ -201,7 +103,7 @@ public class Bbdd {
     * @param resultSet  resultado
     * @throws PersistenciaException error controlado
     */
-   private void closeConecction(Connection connection, Statement statement, ResultSet resultSet) throws PersistenciaException {
+   public void closeConecction(Connection connection, Statement statement, ResultSet resultSet) throws PersistenciaException {
       try {
          if (resultSet != null) {
             resultSet.close();

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CensoModelo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pruebadb</a> &gt; <a href="index.source.html" class="el_package">es.iespuertolacruz.daniel.modelo</a> &gt; <span class="el_source">CensoModelo.java</span></div><h1>CensoModelo.java</h1><pre class="source lang-java linenums">package es.iespuertolacruz.daniel.modelo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import es.iespuertolacruz.daniel.api.Censo;
+import es.iespuertolacruz.daniel.excepcion.FicheroException;
+import es.iespuertolacruz.daniel.excepcion.PersistenciaException;
+
+public class CensoModelo {
+
+   private static final String TABLE_NAME= &quot;Censo&quot;;
+
+    SqliteDb persistencia;
+
+    /**
+     * Constructor por defecto de la clase CensoModelo
+     * 
+     * @throws FicheroException
+     * @throws SQLException
+     */
+<span class="fc" id="L25">    public CensoModelo() throws PersistenciaException, FicheroException, SQLException {</span>
+<span class="fc" id="L26">        persistencia = new SqliteDb(null, null);</span>
+<span class="fc" id="L27">    }</span>
+
+    /**
+     * Metodo encargado de realizar la insercion de un censo
+     * 
+     * @param censo a insertar
+     * @throws PersistenciaException controlada
+     */
+    public void insertar(Censo censo) throws PersistenciaException {
+<span class="fc" id="L36">        String sql = &quot;INSERT INTO censo (dni, nombre, fecha, direccion, telefono) VALUES ('&quot; + censo.getDni() </span>
+<span class="fc" id="L37">        + &quot;','&quot; + censo.getNombre() </span>
+<span class="fc" id="L38">        + &quot;','&quot; + censo.getFecha() </span>
+<span class="fc" id="L39">        + &quot;','&quot; + censo.getDireccion() </span>
+<span class="fc" id="L40">        + &quot;','&quot; + censo.getTelefono() </span>
+        + &quot;')&quot;;
+<span class="fc" id="L42">        persistencia.update(sql);</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Metodo encargado de realizar la eleminacion de un censo
+     * 
+     * @param censo a eliminar
+     * @throws PersistenciaException controlada
+     */
+    public void eliminar(Censo censo) throws PersistenciaException {
+<span class="fc" id="L52">        String sql = &quot;DELETE FROM censo WHERE dni = '&quot; + censo.getDni() + &quot;'&quot;;</span>
+<span class="fc" id="L53">        persistencia.update(sql);</span>
+
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Metodo encargado de realizar la modificacion de un censo
+     * 
+     * @param censo a modificar
+     */
+    public void modificar(Censo censo) throws PersistenciaException {
+<span class="fc" id="L63">        String sql = &quot;UPDATE censo set&quot;</span>
+<span class="fc" id="L64">        +&quot; dni = '&quot; + censo.getDni() </span>
+<span class="fc" id="L65">        + &quot;', nombre = '&quot; + censo.getNombre()</span>
+<span class="fc" id="L66">        + &quot;',  fecha = '&quot; + censo.getFecha() </span>
+<span class="fc" id="L67">        + &quot;', direccion = '&quot; + censo.getDireccion() </span>
+<span class="fc" id="L68">        + &quot;', telefono ='&quot; + censo.getTelefono() </span>
+<span class="fc" id="L69">        + &quot;' WHERE dni = '&quot; + censo.getDni() </span>
+        + &quot;'&quot;;
+<span class="fc" id="L71">        persistencia.update(sql);</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Funcion encargada de obtener un censo
+     * 
+     * @param identificador del censo
+     * @return Objeto censo
+     * @throws PersistenciaException
+     */
+    public Censo buscarCenso(String identificador) throws PersistenciaException {
+<span class="fc" id="L82">        Censo censo = null;</span>
+<span class="fc" id="L83">        String sql = &quot;SELECT * FROM &quot; + TABLE_NAME + &quot; WHERE dni='&quot; + identificador + &quot;'&quot;;</span>
+<span class="fc" id="L84">        ArrayList&lt;Censo&gt; lista = buscar(sql);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (!lista.isEmpty()) {</span>
+<span class="fc" id="L86">            censo = lista.get(0);</span>
+        }
+<span class="fc" id="L88">        return censo;</span>
+    }
+
+    /**
+    * Funcion que obtiene todos los usuarios de la BBDD
+    * @return lista usuarios
+    * @throws PersistenciaException error controlado
+    */
+    public ArrayList&lt;Censo&gt; buscarTodos() throws PersistenciaException {
+<span class="nc" id="L97">        String sql = &quot;SELECT * FROM &quot; + TABLE_NAME;</span>
+<span class="nc" id="L98">        return buscar(sql);</span>
+    }
+
+    /**
+    * Funcion que realiza una consulta sobre una sentencia sql dada
+    * @param sql de la consulta
+    * @return lista resultados (0..n) Usuasios
+    * @throws PersistenciaException error controlado
+    */
+   private ArrayList&lt;Censo&gt; buscar(String sql) throws PersistenciaException {
+<span class="fc" id="L108">    ArrayList&lt;Censo&gt; lista = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L109">    PreparedStatement statement = null;</span>
+<span class="fc" id="L110">    ResultSet resultSet = null;</span>
+<span class="fc" id="L111">    Connection connection = null;</span>
+    try {
+<span class="fc" id="L113">       connection = persistencia.getConnection();</span>
+<span class="fc" id="L114">       statement = connection.prepareStatement(sql);</span>
+<span class="fc" id="L115">       resultSet = statement.executeQuery();</span>
+
+<span class="fc bfc" id="L117" title="All 2 branches covered.">       while(resultSet.next()) {</span>
+<span class="fc" id="L118">          Censo censo = new Censo();</span>
+<span class="fc" id="L119">          censo.setDni(resultSet.getString(&quot;dni&quot;));</span>
+<span class="fc" id="L120">          censo.setNombre(resultSet.getString(&quot;nombre&quot;));</span>
+<span class="fc" id="L121">          censo.setFecha(resultSet.getString(&quot;fecha&quot;));</span>
+<span class="fc" id="L122">          censo.setDireccion(resultSet.getString(&quot;direccion&quot;));</span>
+<span class="fc" id="L123">          censo.setTelefono(resultSet.getInt(&quot;telefono&quot;));</span>
+<span class="fc" id="L124">          lista.add(censo);</span>
+<span class="fc" id="L125">       }</span>
+<span class="nc" id="L126">    } catch (SQLException exception) {</span>
+<span class="nc" id="L127">       throw new PersistenciaException(&quot;Se ha producido un error en la busqueda&quot;, exception);</span>
+    } finally {
+<span class="fc" id="L129">       persistencia.closeConecction(connection, statement, resultSet);</span>
+    }
+<span class="fc" id="L131">    return lista;</span>
+ 
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

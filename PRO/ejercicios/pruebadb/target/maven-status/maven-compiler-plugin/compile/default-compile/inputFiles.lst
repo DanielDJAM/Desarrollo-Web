@@ -1,0 +1,9 @@
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/controller/CensoController.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/modelo/CensoModelo.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/excepcion/CensoException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/excepcion/FicheroException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/modelo/SqliteDb.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/api/Censo.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/excepcion/PersistenciaException.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/modelo/Fichero.java
+/home/daniel/desarrollo/Desarrollo-Web/PRO/ejercicios/pruebadb/src/main/java/es/iespuertolacruz/daniel/modelo/Bbdd.java

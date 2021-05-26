@@ -1,6 +1,8 @@
 package es.iespuertolacruz.daniel.controller;
 
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import es.iespuertolacruz.daniel.api.Censo;
 import es.iespuertolacruz.daniel.excepcion.CensoException;
@@ -39,6 +41,9 @@ public class CensoController {
         }
         if(censo.getDni() == null || censo.getDni().isEmpty()) {
             mensaje = "El dni es nulo o vacio,";
+        }
+        if(!validarDni(censo.getDni())) {
+            mensaje += "dni no valido";
         }
         if (censo.getNombre() == null || censo.getNombre().isEmpty()) {
             mensaje += "El nombre es nulo o vacio,";
@@ -137,6 +142,14 @@ public class CensoController {
             encontrado = true;
         }
         return encontrado;
+    }
+
+    public boolean validarDni(String dni){
+        boolean resultado = false;
+        Pattern patron = Pattern.compile("^[0-9]{8}[A-Za-z]$");
+        Matcher valido = patron.matcher(dni);
+        resultado = valido.find();
+        return resultado;
     }
     
 }
